@@ -34,7 +34,7 @@ public class Actor : MonoBehaviour
         {
             HorizontalCollision(ref velocity);
         }
-        
+
         transform.Translate(velocity);
     }
 
@@ -42,12 +42,19 @@ public class Actor : MonoBehaviour
     {
         Bounds bounds = m_ActorCollider.bounds;
 
+        /* J'aimerai bien que ça marche.
         Vector3 offset = new Vector3(velocity.x, velocity.y, 0f);
 
         m_RayOrigins.BottomLeft = new Vector3(bounds.min.x, bounds.min.y, 0f) + offset;
         m_RayOrigins.BottomRight = new Vector3(bounds.max.x, bounds.min.y, 0f) + offset;
         m_RayOrigins.TopLeft = new Vector3(bounds.min.x, bounds.max.y, 0f) + offset;
         m_RayOrigins.TopRight = new Vector3(bounds.max.x, bounds.max.y, 0f) + offset;
+        */
+
+        m_RayOrigins.BottomLeft = new Vector3(bounds.min.x, bounds.min.y, 0f);
+        m_RayOrigins.BottomRight = new Vector3(bounds.max.x, bounds.min.y, 0f);
+        m_RayOrigins.TopLeft = new Vector3(bounds.min.x, bounds.max.y, 0f);
+        m_RayOrigins.TopRight = new Vector3(bounds.max.x, bounds.max.y, 0f);
     }
 
     private void SetRaySpacing()
@@ -78,7 +85,7 @@ public class Actor : MonoBehaviour
                 }
             }
 
-            Debug.DrawRay(rayOrigin, direction * Vector3.right * rayLength, Color.cyan);
+            Debug.DrawRay(rayOrigin, direction * Vector3.right * rayLength * 5f, Color.cyan);
         }
     }
 
@@ -106,7 +113,7 @@ public class Actor : MonoBehaviour
                 }
             }
 
-            Debug.DrawRay(rayOrigin, direction * Vector3.up * rayLength, Color.cyan);
+            Debug.DrawRay(rayOrigin, direction * Vector3.up * rayLength * 5f, Color.cyan);
         }
     }
 
